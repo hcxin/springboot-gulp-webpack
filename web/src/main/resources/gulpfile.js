@@ -1,7 +1,7 @@
 /**
- Gulpfile for gulp-webpack-demo
- created by fwon
-*/
+ Gulpfile for springboot-gulp-webpack
+ created by haichen
+ */
 
 var gulp = require('gulp'),
     os = require('os'),
@@ -29,8 +29,8 @@ var host = {
 
 //mac chrome: "Google chrome", 
 var browser = os.platform() === 'linux' ? 'Google chrome' : (
-  os.platform() === 'darwin' ? 'Google chrome' : (
-  os.platform() === 'win32' ? 'chrome' : 'firefox'));
+        os.platform() === 'darwin' ? 'Google chrome' : (
+                os.platform() === 'win32' ? 'chrome' : 'firefox'));
 var pkg = require('./package.json');
 
 //将图片拷贝到目标目录
@@ -74,12 +74,12 @@ gulp.task('md5:css', ['sprite'], function (done) {
 gulp.task('fileinclude', function (done) {
     gulp.src(['src/templates/*.html'])
         .pipe(fileinclude({
-          prefix: '@@',
-          basepath: '@file'
+            prefix: '@@',
+            basepath: '@file'
         }))
         .pipe(gulp.dest('dist/templates'))
         .on('end', done);
-        // .pipe(connect.reload())
+    // .pipe(connect.reload())
 });
 
 //雪碧图操作，应该先拷贝图片并压缩合并css
@@ -110,7 +110,7 @@ gulp.task('clean', function (done) {
 //         .on('end', done);
 // });
 //haichen重写该watch task
-gulp.task('watch', function() {
+gulp.task('watch', function () {
 
     //看守所有样式文档
     gulp.watch('src/static/css/*', ['sprite']);
@@ -122,13 +122,12 @@ gulp.task('watch', function() {
     gulp.watch('src/static/images/**/*', ['copy:images']);
 
     //看守html
-    gulp.watch('src/templates/**/*', ['fileinclude']) ;
+    gulp.watch('src/templates/**/*', ['fileinclude']);
 
     livereload.listen();
     gulp.watch(['dist/**']).on('change', livereload.changed);
 
 });
-
 
 
 gulp.task('connect', function () {
@@ -154,9 +153,9 @@ var myDevConfig = Object.create(webpackConfig);
 var devCompiler = webpack(myDevConfig);
 
 //引用webpack对js进行操作
-gulp.task("build-js", ['fileinclude'], function(callback) {
-    devCompiler.run(function(err, stats) {
-        if(err) throw new gutil.PluginError("webpack:build-js", err);
+gulp.task("build-js", ['fileinclude'], function (callback) {
+    devCompiler.run(function (err, stats) {
+        if (err) throw new gutil.PluginError("webpack:build-js", err);
         gutil.log("[webpack:build-js]", stats.toString({
             colors: true
         }));
@@ -165,7 +164,7 @@ gulp.task("build-js", ['fileinclude'], function(callback) {
 });
 
 //发布
-gulp.task('default', ['connect', 'fileinclude','copy:fonts', 'md5:css', 'md5:js', 'open']);
+gulp.task('default', ['connect', 'fileinclude', 'copy:fonts', 'md5:css', 'md5:js', 'open']);
 
 //开发
-gulp.task('dev', ['connect', 'copy:images','copy:fonts', 'fileinclude', 'lessmin', 'build-js', 'watch', 'open']);
+gulp.task('dev', ['connect', 'copy:images', 'copy:fonts', 'fileinclude', 'lessmin', 'build-js', 'watch', 'open']);
