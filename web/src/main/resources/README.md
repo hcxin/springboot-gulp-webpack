@@ -10,10 +10,16 @@ cnpm install
 
 注：执行cnpm的路径为： springboot-gulp-webpack\web\src\main\resources
 
-开发模式：
+4.上一步执行成功后可执行打包命令：
 
 gulp dev
 
-发布：
+5.打包完成后dist下面会生成打包文件，此时启动springboot项目，启动方式非常多，可参考 http://projects.spring.io/spring-boot/。
+
+6.
+
+
+
+注发布时执行如下命令：
 
 gulp
