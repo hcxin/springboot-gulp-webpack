@@ -1,0 +1,18 @@
+server:
+  port: 8080
+  contextPath : /web
+spring:
+  application:
+    name:
+  thymeleaf:
+      prefix: classpath:/dist/templates/
+      suffix: .html
+      mode: HTML
+      encoding: UTF-8
+      cache: false
+  resources:
+     staticLocations: classpath:/dist/static/
+logging:
+  file: logs/web.log
+  level:
+    ROOT: INFO
