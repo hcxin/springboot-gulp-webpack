@@ -7,13 +7,6 @@ var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 var srcDir = path.resolve(process.cwd(), 'src/static');
-// var providePlugin = new webpack.ProvidePlugin({
-//     $: 'jquery',
-//     jQuery: 'jquery',
-//     "jQuery": 'jquery',
-//     'window.jQuery': 'jquery',
-//     'window.$': 'jquery'
-// });
 
 //获取多页面的每个入口文件，用于配置中的entry
 function getEntry() {
